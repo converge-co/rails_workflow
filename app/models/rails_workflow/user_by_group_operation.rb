@@ -1,14 +1,11 @@
+# frozen_string_literal: true
+
 module RailsWorkflow
-  class UserByGroupOperation < Operation
-
-    def can_start?
-      false
+  # Used to describe user operations which assignment
+  # is depend on user group.
+  class UserByGroupOperation < UserOperation
+    def can_be_assigned?(user)
+      super && (template.group == user.try(:group).to_s)
     end
-
-    def can_be_assigned? user
-      super && (self.template.group == user.group.to_s)
-    end
-
-
   end
 end

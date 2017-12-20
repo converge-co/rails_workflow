@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/concern'
 
 module RailsWorkflow
@@ -12,11 +14,9 @@ module RailsWorkflow
     #
 
     module Dependencies
-
       extend ActiveSupport::Concern
 
       included do
-
         serialize :dependencies, JSON
 
         # def dependencies=(dependencies)
@@ -31,7 +31,6 @@ module RailsWorkflow
         #     []
         #   end
         # end
-
       end
     end
   end

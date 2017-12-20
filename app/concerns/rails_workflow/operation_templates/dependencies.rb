@@ -1,38 +1,37 @@
+# frozen_string_literal: true
+
 require 'active_support/concern'
 
 module RailsWorkflow
   module OperationTemplates
-    # = Workflow::ProcessTemplate::Dependenceis
-    #
-    # Operation dependencies is a set of conditions. Operation can be build if all that
-    # dependenceis / conditions are satisfied. This is default implementation of dependenceis
-    # which used to build operation dependency on other operations. You can customize dependency
-    # for example you can add some additional logic depending on existiong processes / operations
-    # or other conditions in your system.
-    #
-
+    # Dependencies defines which operations in which states should be.
     module Dependencies
-
       extend ActiveSupport::Concern
 
       included do
         serialize :dependencies, JSON
+        scope :independent_only, lambda {
+          where(
+            "dependencies is null or dependencies = 'null' or dependencies='[]'"
+          )
+        }
 
-        # dependeing on serialize / rails version it may save null value or 'null' value
-        scope :independent_only, -> { where("dependencies is null or dependencies = 'null' or dependencies='[]'") }
-
-        def resolve_dependency operation
+        # When some operation changes its status engine tries to
+        # resolve dependencies to understand if a new operation
+        # should be created.
+        # For example, if operation A depends on B (DONE) and C (DONE),
+        # by default it will be created if any of B or C changed status
+        # to DONE.
+        # Overwriting this method on some specific operation template
+        # allows you to modify this logic - for example, to build
+        # dependency B (DONE) AND C(DONE) etc.
+        def resolve_dependency(_completed_operation)
           true
         end
 
-        # def dependencies=(dependencies)
-        #   write_attribute(:dependencies, dependencies.to_json.to_s)
-        # end
-        #
         def dependencies
           read_attribute(:dependencies) || []
         end
-
       end
     end
   end

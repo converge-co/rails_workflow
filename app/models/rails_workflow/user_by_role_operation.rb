@@ -1,14 +1,11 @@
+# frozen_string_literal: true
+
 module RailsWorkflow
-  class UserByRoleOperation < Operation
-
-    def can_start?
-      false
+  # Used to describe user operations which assignment
+  # depends on user role.
+  class UserByRoleOperation < UserOperation
+    def can_be_assigned?(user)
+      super && (template.role == user.try(:role))
     end
-
-    def can_be_assigned? user
-      super && (self.template.role == user.role)
-    end
-
-
   end
 end

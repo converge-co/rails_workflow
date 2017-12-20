@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RailsWorkflow
   class ProcessTemplateSerializer < ActiveModel::Serializer
     attributes :uuid, :title, :source,
@@ -18,8 +20,8 @@ module RailsWorkflow
       children = object.operations.map(&:child_process).compact.uniq
       unless children.blank?
         ActiveModel::ArraySerializer.new(
-            children,
-            each_serializer: ProcessTemplateSerializer
+          children,
+          each_serializer: ProcessTemplateSerializer
         ).as_json
       end || []
     end

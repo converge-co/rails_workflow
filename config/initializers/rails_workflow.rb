@@ -1,5 +1,6 @@
-class ActionController::Base
+# frozen_string_literal: true
 
+class ActionController::Base
   def set_current_operation
     session[:current_operation_id] = @operation.id
   end
@@ -13,27 +14,25 @@ class ActionController::Base
       operation_id = session[:current_operation_id]
 
       if @current_workflow_operation &&
-          @current_workflow_operation.id == operation_id
-          RailsWorkflow::Operation.user_ready_statuses.include? @current_workflow_operation.status
+         @current_workflow_operation.id == operation_id
+        RailsWorkflow::Operation.user_ready_statuses.include? @current_workflow_operation.status
 
         @current_workflow_operation
 
       else
 
         @current_workflow_operation = begin
-
-          if RailsWorkflow::Operation.exists?(id: operation_id, status: RailsWorkflow::Operation::WAITING)
+          if RailsWorkflow::Operation.exists?(id: operation_id, status: RailsWorkflow::Status::WAITING)
             operation = RailsWorkflow::Operation.find(operation_id)
             RailsWorkflow::OperationHelperDecorator.decorate(operation)
           else
             clear_current_operation
           end
-
         end
       end
     end
-
   end
+
   helper_method :current_operation
 
   def available_operations
@@ -46,7 +45,6 @@ class ActionController::Base
     operations = RailsWorkflow::Operation.assigned_to(current_user).waiting
     RailsWorkflow::OperationHelperDecorator.decorate_collection(operations)
   end
+
   helper_method :assigned_operations
-
-
 end

@@ -1,17 +1,24 @@
+# frozen_string_literal: true
+
 module RailsWorkflow
   class OperationHelperDecorator < Decorator
-
     include StatusDecorator
-    delegate :id, :title, :instruction, :complete
+    delegate :id, :title, :tag, :instruction, :complete, :data
 
     def assigned_to
       object.assignment.try(:email) || begin
         [
-            ::User.role_text(object.role),
-            ::User.group_text(object.group)
-        ].compact.join(", ")
+          assignment_by_role, assignment_by_group
+        ].compact.join(', ')
       end
+    end
 
+    def assignment_by_role
+      ::User.role_text(object.role) if object.role
+    end
+
+    def assignment_by_group
+      ::User.group_text(object.group) if object.group
     end
 
     def created_at
@@ -23,6 +30,5 @@ module RailsWorkflow
         object.completed_at.strftime('%m/%d/%Y %H:%M')
       end
     end
-
   end
 end

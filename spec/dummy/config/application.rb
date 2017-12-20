@@ -1,22 +1,26 @@
+# frozen_string_literal: true
+
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "action_view/railtie"
-require "sprockets/railtie"
-require "devise"
+require 'active_record/railtie'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'action_view/railtie'
+require 'sprockets/railtie'
+require 'devise'
 # require "rails/test_unit/railtie"
 
 Bundler.require(*Rails.groups)
-require "rails_workflow"
+require 'rails_workflow'
 
 module Dummy
   class Application < Rails::Application
     config.generators do |g|
       g.template_engine :slim
     end
+
+    config.active_job.queue_adapter = :sidekiq
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -31,4 +35,3 @@ module Dummy
     # config.i18n.default_locale = :de
   end
 end
-

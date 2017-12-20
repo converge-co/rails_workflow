@@ -1,9 +1,6 @@
-#Rails Workflow Engine
+# Rails Workflow Engine
 
-[![Join the chat at https://gitter.im/madzhuga/rails_workflow](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/madzhuga/rails_workflow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-[![Code Climate](https://codeclimate.com/github/madzhuga/rails_workflow/badges/gpa.svg)](https://codeclimate.com/github/madzhuga/rails_workflow)
-
+[![Build Status](https://semaphoreci.com/api/v1/madzhuga/rails_workflow/branches/master/shields_badge.svg)](https://semaphoreci.com/madzhuga/rails_workflow)  [![Code Climate](https://codeclimate.com/github/madzhuga/rails_workflow/badges/gpa.svg)](https://codeclimate.com/github/madzhuga/rails_workflow)    [![Join the chat at https://gitter.im/madzhuga/rails_workflow](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/madzhuga/rails_workflow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
 ## Overview
 
 Rails Workflow allows you to organize your application business logic by joining user- and auto- operations in processes. You can
@@ -34,14 +31,14 @@ Engine has UI to configure process templates and manage existing processes.
 * UI is bootstrapped and can be easily changed to fit main rails application design.
 
 ### Documentation
-You can find tutorials and documentation [here](http://www.rails-workflow.com/)
+You can find tutorials and documentation [here](https://github.com/madzhuga/rails_workflow/wiki)
 
 ## Installation
 
 Add to your application's Gemfile:
 
 ```ruby
-gem 'rails_workflow', '0.3.1'
+gem 'rails_workflow'
 ```
 
 And then execute:
@@ -73,4 +70,4 @@ end
 ```
 
 ### Help and support
-Fell free to contact me if you have some questions or need some help.
+Feel free to contact me if you have some questions or need some help.

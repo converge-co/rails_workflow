@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RailsWorkflow
   module Db
     module Mysql
@@ -20,8 +22,6 @@ module RailsWorkflow
                       (SELECT @row_number:=0,@status:=-1) AS t
                ) t1 WHERE row_number = 1
       SQL
-
     end
   end
-
 end

@@ -1,15 +1,17 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
 gemspec
-gem "pg"
-gem "bootstrap-rails-engine"
-gem "slim-rails"
-gem "jquery-rails"
-gem "jquery-ui-rails"
-gem "draper"
-gem "active_model_serializers"
+gem 'active_model_serializers'
+gem 'activejob'
+gem 'bootstrap-rails-engine'
+gem 'draper'
 gem 'guid'
-gem "will_paginate"
-gem "sidekiq"
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'pg'
+gem 'slim-rails'
+gem 'will_paginate'
 
 group :development do
   gem 'sinatra', require: false
@@ -19,7 +21,10 @@ group :test do
   gem 'devise'
 end
 
-gem 'mysql2'
+group :test, :development do
+  gem 'pry'
+  gem 'pry-byebug'
+end
 
 # just for dummy application
 # gem 'inherited_resources'
